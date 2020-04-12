@@ -1,18 +1,15 @@
-package com.pavan.track.resources.implementations;
+package com.pavan.track.apis.implementations;
 
 import com.pavan.track.controllers.interfaces.CategoryController;
-import com.pavan.track.entities.Category;
 import com.pavan.track.models.dto.CategoryDto;
-import com.pavan.track.resources.interfaces.CategoryResource;
+import com.pavan.track.apis.interfaces.CategoryResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("categories")
 public class CategoryResourceImpl implements CategoryResource {
 
     private final CategoryController categoryController;
@@ -23,12 +20,12 @@ public class CategoryResourceImpl implements CategoryResource {
     }
 
     @Override
-    public List<Category> addCategory(@RequestBody List<CategoryDto> categoryDtos) {
-        return categoryController.addCategory(categoryDtos);
+    public List<CategoryDto> addCategory(@RequestBody List<CategoryDto> categoryDtoList) {
+        return categoryController.addCategory(categoryDtoList);
     }
 
     @Override
-    public List<String> getAllCategories() {
+    public List<CategoryDto> getAllCategories() {
         return categoryController.getAllCategories();
     }
 }

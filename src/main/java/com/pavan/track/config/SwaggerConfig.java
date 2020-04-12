@@ -17,7 +17,7 @@ public class SwaggerConfig {
 
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.pavan.track.resources"))
+                .apis(RequestHandlerSelectors.basePackage("com.pavan.track.apis"))
                 .paths(PathSelectors.any())
                 .build();
     }

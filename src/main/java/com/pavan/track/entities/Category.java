@@ -17,7 +17,7 @@ public class Category extends BaseEntity {
     @Column(name = "category_name", nullable = false, unique = true, length = 50)
     private String categoryName;
 
-    @OneToMany(mappedBy = "item")
+    @OneToMany(mappedBy = "category")
     private List<Item> items;
 
     public String getCategoryName() {
