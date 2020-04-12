@@ -10,55 +10,30 @@ public class Item extends BaseEntity {
 
     private static final long serialVersionUID = 824552183452141495L;
 
-    @Column(name = "item_name", length = 50, nullable = false)
-    private String name;
-
-    @Column(name = "cost", nullable = false)
-    private float cost;
-
-    @Column(name = "quantity", nullable = false)
-    private int quantity;
+    @Column(name = "item_name", length = 50, nullable = false, unique = true)
+    private String itemName;
 
     @Column(name = "unit_type", nullable = false)
     private String unitType;
 
-    @Column(name = "unit", nullable = false, length = 15)
-    private String unit;
-
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
-    public String getName() {
-        return name;
+    public String getItemName() {
+        return itemName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
     }
 
-    public float getCost() {
-        return cost;
+    public String getUnitType() {
+        return unitType;
     }
 
-    public void setCost(float cost) {
-        this.cost = cost;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public String getUnit() {
-        return unit;
-    }
-
-    public void setUnit(String unit) {
-        this.unit = unit;
+    public void setUnitType(String unitType) {
+        this.unitType = unitType;
     }
 
     public Category getCategory() {
@@ -71,11 +46,9 @@ public class Item extends BaseEntity {
 
     @Override
     public String toString() {
-        return "Items{" +
-                "name='" + name + '\'' +
-                ", cost=" + cost +
-                ", quantity=" + quantity +
-                ", unit='" + unit + '\'' +
+        return "Item{" +
+                "itemName='" + itemName + '\'' +
+                ", unitType='" + unitType + '\'' +
                 ", categoryName=" + category.getCategoryName() +
                 '}';
     }

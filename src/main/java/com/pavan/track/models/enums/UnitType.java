@@ -3,7 +3,8 @@ package com.pavan.track.models.enums;
 public enum UnitType {
 
     KILOGRAMS("Kilogram"),
-    LITRES("Litre");
+    LITRES("Litre"),
+    PIECE("Piece");
 
     private final String type;
 
@@ -19,7 +20,8 @@ public enum UnitType {
         KG("kg", UnitType.KILOGRAMS),
         GMS("g", UnitType.KILOGRAMS),
         LTR("L", UnitType.LITRES),
-        ML("ml", UnitType.LITRES);
+        ML("ml", UnitType.LITRES),
+        PC("pc", UnitType.PIECE);
 
         private final String unitValue;
         private final UnitType unitType;
