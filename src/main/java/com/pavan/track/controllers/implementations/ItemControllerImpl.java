@@ -62,4 +62,11 @@ public class ItemControllerImpl implements ItemController {
         List<Item> items = itemRepository.findAll();
         return null;
     }
+
+    @Override
+    public Item getItemByItemName(
+                    @NotNullOrBlank(message = "Item name cannot be empty")
+                    String itemName) {
+        return itemRepository.findByItemName(itemName);
+    }
 }

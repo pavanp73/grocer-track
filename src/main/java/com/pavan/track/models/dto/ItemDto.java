@@ -38,6 +38,7 @@ public class ItemDto extends BaseModel {
     @Override
     public String toString() {
         return "ItemDto{" +
+                super.toString() +
                 "itemName='" + itemName + '\'' +
                 ", unitType='" + unitType + '\'' +
                 '}';

@@ -17,23 +17,12 @@ public class Category extends BaseEntity {
     @Column(name = "category_name", nullable = false, unique = true, length = 50)
     private String categoryName;
 
-    @OneToMany(mappedBy = "category")
-    private List<Item> items;
-
     public String getCategoryName() {
         return categoryName;
     }
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
-    }
-
-    public List<Item> getItems() {
-        return items;
-    }
-
-    public void setItems(List<Item> items) {
-        this.items = items;
     }
 
     @Override
