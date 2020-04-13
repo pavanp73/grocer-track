@@ -1,11 +1,13 @@
 package com.pavan.track.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.pavan.track.entities.base.BaseEntity;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "ITEM")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Item extends BaseEntity {
 
     private static final long serialVersionUID = 824552183452141495L;

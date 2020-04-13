@@ -1,11 +1,11 @@
 package com.pavan.track.controllers.interfaces;
 
 import com.pavan.track.annotations.NotNullOrBlank;
+import com.pavan.track.entities.Item;
 import com.pavan.track.models.dto.ItemDto;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 public interface ItemController {
@@ -17,4 +17,8 @@ public interface ItemController {
             List<@Valid ItemDto> itemDtoList);
 
     List<ItemDto> getAllItems();
+
+    Item getItemByItemName(
+            @NotNullOrBlank(message = "Item name cannot be empty")
+            String itemName);
 }
