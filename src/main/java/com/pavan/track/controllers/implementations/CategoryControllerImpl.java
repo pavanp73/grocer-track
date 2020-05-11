@@ -1,13 +1,17 @@
 package com.pavan.track.controllers.implementations;
 
 import com.pavan.track.annotations.NotNullOrBlank;
+import com.pavan.track.apis.interfaces.CategoryResource;
+import com.pavan.track.apis.interfaces.ItemResource;
 import com.pavan.track.controllers.interfaces.CategoryController;
 import com.pavan.track.entities.Category;
 import com.pavan.track.exceptions.CategoryNotFoundException;
 import com.pavan.track.models.dto.CategoryDto;
 import com.pavan.track.repositories.CategoryRepository;
-import com.pavan.track.services.mapper.CategoryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 
@@ -24,16 +28,13 @@ public class CategoryControllerImpl implements CategoryController {
 
     private final CategoryRepository categoryRepository;
 
-    private final CategoryMapper categoryMapper;
-
     @Autowired
-    public CategoryControllerImpl(CategoryRepository categoryRepository, CategoryMapper categoryMapper) {
+    public CategoryControllerImpl(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
-        this.categoryMapper = categoryMapper;
     }
 
     @Override
-    public List<CategoryDto> addCategory(
+    public CollectionModel<CategoryDto> addCategory(
             @NotEmpty(message = "Category list cannot be empty")
             List<@Valid CategoryDto> categoryDtoList) {
 
@@ -44,24 +45,37 @@ public class CategoryControllerImpl implements CategoryController {
                     return category;
                 })
                 .collect(Collectors.toList());
-        return categoryRepository.saveAll(categories).stream()
+        categoryDtoList = categoryRepository.saveAll(categories).stream()
                 .map(category -> {
                     CategoryDto categoryDto = new CategoryDto();
                     categoryDto.setId(category.getId().toString());
                     categoryDto.setCategoryName(category.getCategoryName());
+                    Link addItemLink = WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(ItemResource.class)
+                            .addItem(categoryDto.getId(), null)).withRel("items");
+                    categoryDto.add(addItemLink);
                     return categoryDto;
                 }).collect(Collectors.toList());
+        Link link = WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(CategoryResource.class)
+                .getAllCategories()).withSelfRel();
+        return new CollectionModel<>(categoryDtoList, link);
     }
 
     @Override
-    public List<CategoryDto> getAllCategories() {
-        return categoryRepository.findAll().stream()
+    public CollectionModel<CategoryDto> getAllCategories() {
+        List<CategoryDto> categoryDtoList = categoryRepository.findAll().stream()
                 .map(category -> {
                     CategoryDto categoryDto = new CategoryDto();
                     categoryDto.setId(category.getId().toString());
                     categoryDto.setCategoryName(category.getCategoryName());
+                    Link addItemLink = WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(ItemResource.class)
+                            .addItem(categoryDto.getId(), null)).withRel("items");
+                    categoryDto.add(addItemLink);
                     return categoryDto;
                 }).collect(Collectors.toList());
+
+        Link link = WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(CategoryResource.class)
+            .getAllCategories()).withSelfRel();
+        return new CollectionModel<>(categoryDtoList, link);
     }
 
     @Override

@@ -1,7 +1,8 @@
 package com.pavan.track.apis.interfaces;
 
 import com.pavan.track.models.dto.CategoryDto;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,11 +14,11 @@ import java.util.List;
 public interface CategoryResource {
 
     @PostMapping
-    @ApiOperation(value = "Create a category")
-    List<CategoryDto> addCategory(@RequestBody List<CategoryDto> categoryDtoList);
+    @Operation(summary = "Creates new category")
+    CollectionModel<CategoryDto> addCategory(@RequestBody List<CategoryDto> categoryDtoList);
 
     @GetMapping
-    @ApiOperation(value = "Fetch all categories")
-    List<CategoryDto> getAllCategories();
+    @Operation(summary = "Lists all categories")
+    CollectionModel<CategoryDto> getAllCategories();
 
 }

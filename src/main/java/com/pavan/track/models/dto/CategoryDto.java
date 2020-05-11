@@ -1,16 +1,14 @@
 package com.pavan.track.models.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.pavan.track.annotations.NotNullOrBlank;
 import com.pavan.track.models.BaseModel;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 
-@ApiModel
-public class CategoryDto extends BaseModel {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class CategoryDto extends BaseModel<CategoryDto> {
 
     private static final long serialVersionUID = -5932298894318288564L;
 
-    @ApiModelProperty(value = "Category name")
     @NotNullOrBlank(message = "Category name cannot be blank")
     private String categoryName;
 
