@@ -1,9 +1,7 @@
 package com.pavan.track.models.dto;
 
 import com.pavan.track.models.BaseModel;
-import io.swagger.annotations.ApiModel;
 
-@ApiModel
 public class OrderResponseDto extends BaseModel {
 
     private static final long serialVersionUID = 3885595972892440407L;
@@ -14,7 +12,7 @@ public class OrderResponseDto extends BaseModel {
 
     private String categoryName;
 
-    private float price;
+    private double price;
 
     private String weight;
 
@@ -42,11 +40,11 @@ public class OrderResponseDto extends BaseModel {
         this.categoryName = categoryName;
     }
 
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

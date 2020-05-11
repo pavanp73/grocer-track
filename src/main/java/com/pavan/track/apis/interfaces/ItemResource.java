@@ -1,7 +1,7 @@
 package com.pavan.track.apis.interfaces;
 
 import com.pavan.track.models.dto.ItemDto;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.List;
 public interface ItemResource {
 
     @PostMapping
-    @ApiOperation(value = "Add an item")
+    @Operation(summary = "Creates a new Item for given category Id")
     List<ItemDto> addItem(@PathVariable("categoryId") String categoryId,
             @RequestBody List<ItemDto> itemDtoList);
 }

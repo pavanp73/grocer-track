@@ -2,34 +2,25 @@ package com.pavan.track.models.dto;
 
 import com.pavan.track.annotations.NotNullOrBlank;
 import com.pavan.track.models.BaseModel;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.Positive;
 
-@ApiModel
 public class OrderRequestDto extends BaseModel {
 
     private static final long serialVersionUID = -4140634808210307088L;
 
-    @ApiModelProperty
     @NotNullOrBlank(message = "Order date cannot be blank")
     private String orderDate;
 
-    @ApiModelProperty
     @Positive(message = "Weight cannot be negative or 0")
     private int weight;
 
-    @ApiModelProperty
     @NotNullOrBlank(message = "Units cannot be blank")
     private String units;
 
-    @ApiModelProperty
     @Positive(message = "Price cannot be negative or 0")
     private float price;
-
-    @ApiModelProperty
-    @NotNullOrBlank(message = "Item name cannot be blank")
+        @NotNullOrBlank(message = "Item name cannot be blank")
     private String itemName;
 
     public String getOrderDate() {

@@ -1,15 +1,11 @@
 package com.pavan.track.entities.base;
 
-import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.Type;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @MappedSuperclass
@@ -23,13 +19,13 @@ public class BaseEntity implements Serializable {
     @Column(updatable = false, nullable = false)
     private UUID id;
 
-    @CreationTimestamp
+    @Type(type = "org.hibernate.type.LocalDateTimeType")
     @Column(name = "created_time", nullable = false)
-    private Date createdTime;
+    private LocalDateTime createdTime;
 
-    @UpdateTimestamp
+    @Type(type = "org.hibernate.type.LocalDateTimeType")
     @Column(name = "updated_time", nullable = false)
-    private Date updatedTime;
+    private LocalDateTime updatedTime;
 
     public UUID getId() {
         return id;
@@ -39,19 +35,27 @@ public class BaseEntity implements Serializable {
         this.id = id;
     }
 
-    public Date getCreatedTime() {
+    @PrePersist
+    public void setup() {
+        if (createdTime == null) {
+            createdTime = LocalDateTime.now();
+        }
+        updatedTime = LocalDateTime.now();
+    }
+
+    public LocalDateTime getCreatedTime() {
         return createdTime;
     }
 
-    public void setCreatedTime(Date createdTime) {
+    public void setCreatedTime(LocalDateTime createdTime) {
         this.createdTime = createdTime;
     }
 
-    public Date getUpdatedTime() {
+    public LocalDateTime getUpdatedTime() {
         return updatedTime;
     }
 
-    public void setUpdatedTime(Date updatedTime) {
+    public void setUpdatedTime(LocalDateTime updatedTime) {
         this.updatedTime = updatedTime;
     }
 
