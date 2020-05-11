@@ -1,9 +1,10 @@
 package com.pavan.track.entities;
 
 import com.pavan.track.entities.base.BaseEntity;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "ORDER")
@@ -11,9 +12,9 @@ public class Order extends BaseEntity {
 
     private static final long serialVersionUID = -4089453266663667758L;
 
-    @Temporal(TemporalType.DATE)
+    @Type(type = "org.hibernate.type.LocalDateType")
     @Column(name = "order_date", nullable = false)
-    private Date orderDate;
+    private LocalDate orderDate;
 
     @Column(name = "weight", nullable = false)
     private int weight;
@@ -22,17 +23,17 @@ public class Order extends BaseEntity {
     private String units;
 
     @Column(name = "price", nullable = false)
-    private float price;
+    private double price;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id", nullable = false)
     private Item item;
 
-    public Date getOrderDate() {
+    public LocalDate getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(Date orderDate) {
+    public void setOrderDate(LocalDate orderDate) {
         this.orderDate = orderDate;
     }
 
@@ -44,11 +45,11 @@ public class Order extends BaseEntity {
         this.weight = weight;
     }
 
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
