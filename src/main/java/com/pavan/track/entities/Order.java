@@ -29,6 +29,9 @@ public class Order extends BaseEntity {
     @JoinColumn(name = "item_id", nullable = false)
     private Item item;
 
+    @Column(name = "store_name")
+    private String storeName;
+
     public LocalDate getOrderDate() {
         return orderDate;
     }
@@ -69,14 +72,23 @@ public class Order extends BaseEntity {
         this.units = units;
     }
 
+    public String getStoreName() {
+        return storeName;
+    }
+
+    public void setStoreName(String storeName) {
+        this.storeName = storeName;
+    }
+
     @Override
     public String toString() {
-        return "ItemOrder{" +
+        return "Order{" +
                 "orderDate=" + orderDate +
                 ", weight=" + weight +
                 ", units='" + units + '\'' +
                 ", price=" + price +
                 ", itemName=" + item.getItemName() +
+                ", storeName='" + storeName + '\'' +
                 "} " + super.toString();
     }
 }

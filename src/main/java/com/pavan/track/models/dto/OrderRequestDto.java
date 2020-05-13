@@ -1,7 +1,9 @@
 package com.pavan.track.models.dto;
 
+import com.pavan.track.annotations.CheckStoreName;
 import com.pavan.track.annotations.NotNullOrBlank;
 import com.pavan.track.models.BaseModel;
+import com.pavan.track.models.enums.Store;
 
 import javax.validation.constraints.Positive;
 
@@ -20,8 +22,12 @@ public class OrderRequestDto extends BaseModel {
 
     @Positive(message = "Price cannot be negative or 0")
     private float price;
-        @NotNullOrBlank(message = "Item name cannot be blank")
+
+    @NotNullOrBlank(message = "Item name cannot be blank")
     private String itemName;
+
+    @CheckStoreName(message = "Store name must be one of the following: BigBasket/Dunzo/FTH/StoreSe")
+    private String storeName;
 
     public String getOrderDate() {
         return orderDate;
@@ -63,15 +69,23 @@ public class OrderRequestDto extends BaseModel {
         this.itemName = itemName;
     }
 
+    public String getStoreName() {
+        return storeName;
+    }
+
+    public void setStoreName(String storeName) {
+        this.storeName = storeName;
+    }
+
     @Override
     public String toString() {
-        return "OrderDto{" +
-                super.toString() +
+        return "OrderRequestDto{" +
                 "orderDate='" + orderDate + '\'' +
                 ", weight=" + weight +
                 ", units='" + units + '\'' +
                 ", price=" + price +
                 ", itemName='" + itemName + '\'' +
-                "} ";
+                ", storeName='" + storeName + '\'' +
+                "} " + super.toString();
     }
 }
