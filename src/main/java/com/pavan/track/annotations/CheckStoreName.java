@@ -1,6 +1,6 @@
 package com.pavan.track.annotations;
 
-import com.pavan.track.validations.UnitTypeValidator;
+import com.pavan.track.validations.StoreNameValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -13,7 +13,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Target({FIELD, METHOD, PARAMETER, ANNOTATION_TYPE, TYPE_USE})
 @Retention(RUNTIME)
-@Constraint(validatedBy = UnitTypeValidator.class)
+@Constraint(validatedBy = StoreNameValidator.class)
 @Documented
 public @interface CheckStoreName {
 

@@ -15,6 +15,7 @@ public class OrderMapper {
         orderResponseDto.setCategoryName(order.getItem().getCategory().getCategoryName());
         orderResponseDto.setPrice(order.getPrice());
         orderResponseDto.setWeight(order.getWeight() + " " + order.getUnits());
+        orderResponseDto.setStoreName(order.getStoreName());
         return orderResponseDto;
     }
 }

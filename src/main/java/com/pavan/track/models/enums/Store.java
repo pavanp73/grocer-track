@@ -5,7 +5,8 @@ public enum Store {
     BIG_BASKET("BigBasket"),
     DUNZO("Dunzo"),
     FTH("FTH"),
-    STORE_SE("StoreSe");
+    STORE_SE("StoreSe"),
+    APARTMENT("Apartment Security");
 
     private final String storeName;
 
