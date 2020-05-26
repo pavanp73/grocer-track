@@ -16,6 +16,8 @@ public class OrderResponseDto extends BaseModel {
 
     private String weight;
 
+    private String storeName;
+
     public String getOrderDate() {
         return orderDate;
     }
@@ -56,6 +58,14 @@ public class OrderResponseDto extends BaseModel {
         this.weight = weight;
     }
 
+    public String getStoreName() {
+        return storeName;
+    }
+
+    public void setStoreName(String storeName) {
+        this.storeName = storeName;
+    }
+
     @Override
     public String toString() {
         return "OrderResponseDto{" +
@@ -65,6 +75,7 @@ public class OrderResponseDto extends BaseModel {
                 ", categoryName='" + categoryName + '\'' +
                 ", cost=" + price +
                 ", weight='" + weight + '\'' +
+                ", storeName='" + storeName + '\'' +
                 "} " + super.toString();
     }
 }

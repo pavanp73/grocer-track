@@ -44,6 +44,7 @@ public class OrderControllerImpl implements OrderController {
         order.setUnits(orderRequestDto.getUnits());
         order.setWeight(orderRequestDto.getWeight());
         order.setItem(item);
+        order.setStoreName(orderRequestDto.getStoreName());
         return orderMapper.mapToDto(
                 orderRepository.save(order)
         );
