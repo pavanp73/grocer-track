@@ -3,19 +3,18 @@ package com.pavan.track.models.dto;
 import com.pavan.track.annotations.CheckStoreName;
 import com.pavan.track.annotations.NotNullOrBlank;
 import com.pavan.track.models.BaseModel;
-import com.pavan.track.models.enums.Store;
 
 import javax.validation.constraints.Positive;
 
-public class OrderRequestDto extends BaseModel {
+public class PurchaseRequestDto extends BaseModel {
 
     private static final long serialVersionUID = -4140634808210307088L;
 
-    @NotNullOrBlank(message = "Order date cannot be blank")
-    private String orderDate;
+    @NotNullOrBlank(message = "Purchase date cannot be blank")
+    private String purchaseDate;
 
     @Positive(message = "Weight cannot be negative or 0")
-    private int weight;
+    private double weight;
 
     @NotNullOrBlank(message = "Units cannot be blank")
     private String units;
@@ -29,19 +28,19 @@ public class OrderRequestDto extends BaseModel {
     @CheckStoreName(message = "Store name must be one of the following: BigBasket/Dunzo/FTH/StoreSe")
     private String storeName;
 
-    public String getOrderDate() {
-        return orderDate;
+    public String getPurchaseDate() {
+        return purchaseDate;
     }
 
-    public void setOrderDate(String orderDate) {
-        this.orderDate = orderDate;
+    public void setPurchaseDate(String purchaseDate) {
+        this.purchaseDate = purchaseDate;
     }
 
-    public int getWeight() {
+    public double getWeight() {
         return weight;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(double weight) {
         this.weight = weight;
     }
 
@@ -79,8 +78,8 @@ public class OrderRequestDto extends BaseModel {
 
     @Override
     public String toString() {
-        return "OrderRequestDto{" +
-                "orderDate='" + orderDate + '\'' +
+        return "PurchaseRequestDto{" +
+                "purchaseDate='" + purchaseDate + '\'' +
                 ", weight=" + weight +
                 ", units='" + units + '\'' +
                 ", price=" + price +

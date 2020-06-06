@@ -1,15 +1,15 @@
 package com.pavan.track.controllers.implementations;
 
 import com.pavan.track.controllers.interfaces.ChartController;
-import com.pavan.track.entities.Order;
+import com.pavan.track.entities.Purchase;
 import com.pavan.track.models.dto.CategoryWiseCost;
 import com.pavan.track.models.dto.DoughnutChartDto;
-import com.pavan.track.repositories.OrderRepository;
+import com.pavan.track.repositories.PurchaseRepository;
+import com.pavan.track.services.utils.MathUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 
-import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
@@ -19,32 +19,31 @@ import java.util.stream.Collectors;
 @Validated
 public class ChartControllerImpl implements ChartController {
 
-    private final OrderRepository orderRepository;
+    private final PurchaseRepository purchaseRepository;
 
     @Autowired
-    public ChartControllerImpl(OrderRepository orderRepository) {
-        this.orderRepository = orderRepository;
+    public ChartControllerImpl(PurchaseRepository purchaseRepository) {
+        this.purchaseRepository = purchaseRepository;
     }
 
     @Override
     public DoughnutChartDto getDataForDoughnutChart(String month) {
 
-        DecimalFormat df = new DecimalFormat("#.00");
         LocalDate start = LocalDate.of(2020, Month.valueOf((month.toUpperCase())), 1);
         LocalDate end = start.withDayOfMonth(start.lengthOfMonth());
         System.out.println(start.toString() + " " + end.toString());
-        List<Order> orders = orderRepository.findAllByOrderDateBetween(start, end);
+        List<Purchase> purchases = purchaseRepository.findAllByPurchaseDateBetween(start, end);
 
-        List<CategoryWiseCost> categoryWiseCostList = orders.stream()
+        List<CategoryWiseCost> categoryWiseCostList = purchases.stream()
                 .collect(Collectors.groupingBy(
                         o -> o.getItem().getCategory().getCategoryName()
                 ))
                 .entrySet().stream()
                 .map(x -> {
-                    double sum = x.getValue().stream().mapToDouble(Order::getPrice).sum();
+                    double sum = x.getValue().stream().mapToDouble(value -> MathUtility.twoDecimalRoundOff(value.getPrice())).sum();
                     CategoryWiseCost categoryWiseCost = new CategoryWiseCost();
                     categoryWiseCost.setCategoryName(x.getKey());
-                    categoryWiseCost.setCategoryWiseTotalCost(Double.parseDouble(df.format(sum)));
+                    categoryWiseCost.setCategoryWiseTotalCost(sum);
                     return categoryWiseCost;
                 }).collect(Collectors.toList());
 

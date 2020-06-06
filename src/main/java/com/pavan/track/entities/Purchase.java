@@ -7,17 +7,17 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "ORDER")
-public class Order extends BaseEntity {
+@Table(name = "PURCHASE")
+public class Purchase extends BaseEntity {
 
     private static final long serialVersionUID = -4089453266663667758L;
 
     @Type(type = "org.hibernate.type.LocalDateType")
-    @Column(name = "order_date", nullable = false)
-    private LocalDate orderDate;
+    @Column(name = "purchase_date", nullable = false)
+    private LocalDate purchaseDate;
 
     @Column(name = "weight", nullable = false)
-    private int weight;
+    private double weight;
 
     @Column(name = "units", nullable = false)
     private String units;
@@ -32,19 +32,19 @@ public class Order extends BaseEntity {
     @Column(name = "store_name")
     private String storeName;
 
-    public LocalDate getOrderDate() {
-        return orderDate;
+    public LocalDate getPurchaseDate() {
+        return purchaseDate;
     }
 
-    public void setOrderDate(LocalDate orderDate) {
-        this.orderDate = orderDate;
+    public void setPurchaseDate(LocalDate purchaseDate) {
+        this.purchaseDate = purchaseDate;
     }
 
-    public int getWeight() {
+    public double getWeight() {
         return weight;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(double weight) {
         this.weight = weight;
     }
 
@@ -82,8 +82,8 @@ public class Order extends BaseEntity {
 
     @Override
     public String toString() {
-        return "Order{" +
-                "orderDate=" + orderDate +
+        return "Purchase{" +
+                "purchaseDate=" + purchaseDate +
                 ", weight=" + weight +
                 ", units='" + units + '\'' +
                 ", price=" + price +

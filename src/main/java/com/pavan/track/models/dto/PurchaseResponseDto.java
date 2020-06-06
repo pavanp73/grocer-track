@@ -2,11 +2,11 @@ package com.pavan.track.models.dto;
 
 import com.pavan.track.models.BaseModel;
 
-public class OrderResponseDto extends BaseModel {
+public class PurchaseResponseDto extends BaseModel {
 
     private static final long serialVersionUID = 3885595972892440407L;
 
-    private String orderDate;
+    private String purchaseDate;
 
     private String itemName;
 
@@ -18,12 +18,12 @@ public class OrderResponseDto extends BaseModel {
 
     private String storeName;
 
-    public String getOrderDate() {
-        return orderDate;
+    public String getPurchaseDate() {
+        return purchaseDate;
     }
 
-    public void setOrderDate(String orderDate) {
-        this.orderDate = orderDate;
+    public void setPurchaseDate(String purchaseDate) {
+        this.purchaseDate = purchaseDate;
     }
 
     public String getItemName() {
@@ -68,9 +68,9 @@ public class OrderResponseDto extends BaseModel {
 
     @Override
     public String toString() {
-        return "OrderResponseDto{" +
+        return "PurchaseResponseDto{" +
                 super.getId() +
-                "orderDate='" + orderDate + '\'' +
+                "purchaseDate='" + purchaseDate + '\'' +
                 ", itemName='" + itemName + '\'' +
                 ", categoryName='" + categoryName + '\'' +
                 ", cost=" + price +
