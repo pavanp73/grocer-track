@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.pavan</groupId>
 	<artifactId>grocer-track</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0-RELEASE</version>
 	<name>grocer-track</name>
 	<description>Tacking system for daily groceries, vegetables and fruits</description>
 
