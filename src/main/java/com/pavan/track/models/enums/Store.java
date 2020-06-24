@@ -6,7 +6,8 @@ public enum Store {
     DUNZO("Dunzo"),
     FTH("FTH"),
     STORE_SE("StoreSe"),
-    APARTMENT("Apartment Security");
+    APARTMENT("Apartment Security"),
+    PROVISIONAL_STORE("Provisional Store");
 
     private final String storeName;
 

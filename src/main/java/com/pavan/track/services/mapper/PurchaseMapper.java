@@ -5,6 +5,9 @@ import com.pavan.track.models.dto.PurchaseResponseDto;
 import com.pavan.track.services.utils.MathUtility;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class PurchaseMapper {
 
@@ -18,5 +21,11 @@ public class PurchaseMapper {
         purchaseResponseDto.setWeight(MathUtility.twoDecimalRoundOff(purchase.getWeight()) + " " + purchase.getUnits());
         purchaseResponseDto.setStoreName(purchase.getStoreName());
         return purchaseResponseDto;
+    }
+
+    public List<PurchaseResponseDto> mapToDtoList(List<Purchase> purchases){
+        return purchases.stream()
+                .map(this::mapToDto)
+                .collect(Collectors.toList());
     }
 }

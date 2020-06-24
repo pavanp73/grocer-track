@@ -10,10 +10,14 @@ import com.pavan.track.repositories.PurchaseRepository;
 import com.pavan.track.services.mapper.PurchaseMapper;
 import com.pavan.track.services.utils.DateUtility;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
+import java.util.List;
 
 @Controller
 @Validated
@@ -48,5 +52,15 @@ public class PurchaseControllerImpl implements PurchaseController {
         return purchaseMapper.mapToDto(
                 purchaseRepository.save(purchase)
         );
+    }
+
+    @Override
+    public List<PurchaseResponseDto> getPurchases(String categoryName) {
+
+        LocalDate end = LocalDate.now();
+        LocalDate start = end.minusDays(25);
+        System.out.println(start.toString() + " " + end.toString());
+        List<Purchase> purchases = purchaseRepository.findAllByPurchaseDateBetween(start, end);
+        return purchaseMapper.mapToDtoList(purchases);
     }
 }
